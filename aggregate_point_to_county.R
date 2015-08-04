@@ -22,6 +22,7 @@ write.csv(out,"yield_by_county.csv",row.names = F) # replace output directory he
 
 # average the overall yield by runs and sort
 ave <- aggregate(yield ~ run, FUN = mean, data=pt, na.rm=T)
+attach(ave)
 sortyield <-ave[order(yield),]
 
 # add a new column to check the order
