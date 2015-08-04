@@ -21,7 +21,7 @@ out <- aggregate(yield ~ run + year + county, FUN = mean, data=pt, na.rm=T)
 write.csv(out,"yield_by_county.csv",row.names = F) # replace output directory here
 
 # average the overall yield by runs and sort
-ave <- aggregate(yield ~ run, FUN = mean, data=pt, na.rm=T)
+ave <- aggregate(yield ~ run, FUN = mean, data=out, na.rm=T)
 attach(ave)
 sortyield <-ave[order(yield),]
 
@@ -32,7 +32,7 @@ ss <-cbind(sortyield,"order"=1:nrow(sortyield))
 sss <-subset(ss, order %in% c(seq(5,500,25)))
 
 # subsetting the original file by 20 runs
-spt <-subset(pt, run %in% c(sss$run))
+spt <-subset(out, run %in% c(sss$run))
 
 # output the selected county yield data
 write.csv(spt,"yield_by_county_selected.csv",row.names = F) 
